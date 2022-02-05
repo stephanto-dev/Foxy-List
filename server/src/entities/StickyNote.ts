@@ -2,6 +2,8 @@ import {Entity, Column, PrimaryColumn,CreateDateColumn, ManyToOne, JoinColumn, O
 import { Item } from "./Item";
 import { User } from "./User";
 
+import {v4 as uuid} from "uuid";
+
 @Entity("stickyNotes")
 class StickyNote{
 
@@ -16,6 +18,12 @@ class StickyNote{
 
     @CreateDateColumn()
     created_at: Date;
+
+    constructor(){
+        if(!this.id){
+            this.id = uuid();
+        }
+    }
 
     @ManyToOne(() => User, user=> user.stickyNote)
     @JoinColumn({name: 'idUser'})

@@ -1,10 +1,12 @@
-import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryColumn } from 'typeorm';
 import { StickyNote } from './StickyNote';
+
+import {v4 as uuid} from "uuid";
 
 @Entity("items")
 class Item{
 
-    @Column()
+    @PrimaryColumn()
     id: string;
 
     @Column()
@@ -15,6 +17,12 @@ class Item{
 
     @Column()
     idStickyNote: string;
+
+    constructor(){
+        if(!this.id){
+            this.id = uuid();
+        }
+    }
 
     @ManyToOne(()=>StickyNote, (stickyNote) => stickyNote.item)
     @JoinColumn({name: 'idStickyNote'})
