@@ -3,7 +3,6 @@ import { UsersRepository } from "../repositories/UsersRepository";
 
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import "dotenv/config";
 
 interface ILoginCreate{
     email: string;
@@ -26,10 +25,15 @@ class LoginService{
             throw new Error('invalid password');
         }
 
-        let token = jwt.sign({
+        const token = jwt.sign({
             userId: userExists.id,
             email: userExists.email
-        },)
+        }, `${process.env.JWT_SECRET}`,
+        {
+            expiresIn: "1h"
+        })
+
+        return token;
     }
 }
 

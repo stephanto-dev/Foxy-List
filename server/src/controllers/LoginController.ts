@@ -10,9 +10,9 @@ class LoginController{
         const loginService = new LoginService();
 
         try {
-            await loginService.create({email, password});
+            const token = await loginService.create({email, password});
 
-            return response.status(200).json({message: "Authenticated"});
+            return response.status(200).json({message: "Authenticated", token});
         } catch (error:any) {
             return response.status(401).json({
                 message: error.message,
