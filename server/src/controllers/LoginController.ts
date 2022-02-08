@@ -4,7 +4,7 @@ import { LoginService } from "../services/LoginService";
 
 
 class LoginController{
-    async create(request:Request,response:Response){
+    async handle(request:Request,response:Response){
         const {email, password} = request.body;
 
         const loginService = new LoginService();

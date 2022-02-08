@@ -4,7 +4,7 @@ import { SignupService } from "../services/SignupService";
 
 
 class SignupController{
-    async create(request:Request, response: Response){
+    async handle(request:Request, response: Response){
         const {name, email, password} = request.body;
 
         const signupService = new SignupService();
